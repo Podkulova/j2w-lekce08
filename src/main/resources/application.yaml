@@ -1,0 +1,10 @@
+spring:
+  freemarker:
+    cache: false
+    settings:
+      auto_import: /_imports/common.ftlh as c, /_imports/form.ftlh as form
+  datasource:
+    url: jdbc:h2:file:./data/lekce8;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;COLLATION=CZECH
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''

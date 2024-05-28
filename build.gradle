@@ -1,0 +1,54 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+group = 'cz.czechitas.java2webapps'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://mvnrepo.czechitas.dev/maven2/")
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jetty'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'dev.czechitas.java2:czechitas-spring-boot-starter:0.9.8'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.flywaydb:flyway-core'
+
+    runtimeOnly 'com.h2database:h2'
+
+    modules {
+        module('org.springframework.boot:spring-boot-starter-tomcat') {
+            replacedBy('org.springframework.boot:spring-boot-starter-jetty', "Use Jetty instead of Tomcat")
+        }
+    }
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
